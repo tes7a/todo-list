@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
+import {AddItemForm} from "./Component/AddItemForm";
 
 export type FilterValuesType = "all" | "active" | "completed";
+
 type TodolistType = {
     id: string
     title: string
@@ -11,7 +13,7 @@ type TodolistType = {
 }
 
 type TasksStateType = {
-    [key: string]: Array<TaskType>
+    [key: string]: TaskType[]
 }
 
 
@@ -41,14 +43,12 @@ function App() {
         tasks[todolistId] = todolistTasks.filter(t => t.id != id);
         setTasks({...tasks});
     }
-
     function addTask(title: string, todolistId: string) {
         let task = {id: v1(), title: title, isDone: false};
         let todolistTasks = tasks[todolistId];
         tasks[todolistId] = [task, ...todolistTasks];
         setTasks({...tasks});
     }
-
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
         let todolistTasks = tasks[todolistId];
         let task = todolistTasks.find(t => t.id === id);
@@ -57,7 +57,6 @@ function App() {
             setTasks({...tasks});
         }
     }
-
     function changeFilter(value: FilterValuesType, todolistId: string) {
         let todolist = todolists.find(tl => tl.id === todolistId);
         if (todolist) {
@@ -65,15 +64,24 @@ function App() {
             setTodolists([...todolists])
         }
     }
-
     function removeTodolist(id: string) {
         setTodolists(todolists.filter(tl => tl.id != id));
         delete tasks[id];
         setTasks({...tasks});
     }
+    function addTodoListForm(title: string) {
+        let todolist : TodolistType = {
+            id: v1(),
+            filter: "all",
+            title: title
+        }
+        setTodolists([todolist,...todolists])
+        setTasks({...tasks,[todolist.id]: []})
+    }
 
     return (
         <div className="App">
+            <AddItemForm addItem={addTodoListForm} />
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];
