@@ -23,6 +23,10 @@ type PropsType = {
     filter: FilterValuesType
 }
 
+// let tasklistTitle = tasks[todolistId];
+// tasks[todolistId] = tasklistTitle.map(m=> m.id === id ? {...m, title: newTitle} : m)
+// setTasks({...tasks} )
+
 export function Todolist(props: PropsType) {
     const removeTodolist = () => props.removeTodolist(props.id)
     const changeTitleTodolist = (newTitle: string) => props.changeTitleTodolist(props.id, newTitle)
