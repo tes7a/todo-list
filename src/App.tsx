@@ -51,11 +51,8 @@ function App() {
     }
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
         let todolistTasks = tasks[todolistId];
-        let task = todolistTasks.find(t => t.id === id);
-        if (task) {
-            task.isDone = isDone;
-            setTasks({...tasks});
-        }
+        tasks[todolistId] = todolistTasks.map(m => m.id === id?{...m, isDone: isDone} : m );
+        setTasks({...tasks})
     }
     function changeFilter(value: FilterValuesType, todolistId: string) {
         let todolist = todolists.find(tl => tl.id === todolistId);
@@ -70,22 +67,22 @@ function App() {
         setTasks({...tasks});
     }
     function addTodoListForm(title: string) {
-        let todolist : TodolistType = {
+        let todolist: TodolistType = {
             id: v1(),
             filter: "all",
             title: title
         }
-        setTodolists([todolist,...todolists])
-        setTasks({...tasks,[todolist.id]: []})
+        setTodolists([todolist, ...todolists])
+        setTasks({...tasks, [todolist.id]: []})
     }
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        let todolistTitle = tasks[todolistId];
-        let task = todolistTitle.map(m=> m.id === id ? {...m, title: newTitle} : m)
-
+        let tasklistTitle = tasks[todolistId];
+        tasks[todolistId] = tasklistTitle.map(m => m.id === id ? {...m, title: newTitle} : m)
+        setTasks({...tasks})
     }
     function changeTitleTodolist(id: string, newTitle: string) {
-       const todolist = todolists.find(tl => tl.id === id);
-        if (todolist){
+        const todolist = todolists.find(tl => tl.id === id);
+        if (todolist) {
             todolist.title = newTitle;
             setTodolists([...todolists]);
         }
@@ -93,7 +90,7 @@ function App() {
 
     return (
         <div className="App">
-            <AddItemForm addItem={addTodoListForm} />
+            <AddItemForm addItem={addTodoListForm}/>
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];
