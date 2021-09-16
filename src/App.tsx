@@ -55,9 +55,7 @@ function App() {
     }
 
     function removeTodolist(id: string) {
-        setTodolists(todolists.filter(tl => tl.id != id));
-        delete tasks[id];
-        setTasks({...tasks});
+        setTodolists(todolists.filter(f => f.id !== id))
     }
 
     function addTodoListForm(title: string) {
