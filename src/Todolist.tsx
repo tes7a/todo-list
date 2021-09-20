@@ -38,12 +38,17 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
     // const addTask = (title: string) => {
     //     props.addTask(title, id)
     // }
+
     const callBackHandlerInput = () => {
         if (title.trim() !== "") {
-            return props.addTask(title.trim(), id)
+            props.addTask(title.trim(), id)
+            setTitle("")
+        } else {
+            setError("Error")
         }
-        setError("Error!")
     }
+
+
     const onChangeError = (title: string) => {
         setTitle(title)
         setError("")
