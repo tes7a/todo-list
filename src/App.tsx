@@ -47,7 +47,8 @@ function App() {
     }
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].map(m => m.id === id ? {...m, isDone: isDone} : m)});;
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(m => m.id === id ? {...m, isDone: isDone} : m)});
+        ;
     }
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
@@ -59,13 +60,9 @@ function App() {
     }
 
     function addTodoListForm(title: string) {
-        let todolist: TodolistType = {
-            id: v1(),
-            filter: "all",
-            title: title
-        }
-        setTodolists([todolist, ...todolists])
-        setTasks({...tasks, [todolist.id]: []})
+        let newTodoListID = v1()
+        setTodolists([{id: newTodoListID, filter: "all", title: title}, ...todolists])
+        setTasks({...tasks, [newTodoListID]: []})
     }
 
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
@@ -73,7 +70,7 @@ function App() {
     }
 
     function changeTitleTodolist(id: string, newTitle: string) {
-        setTodolists(todolists.map(m => m.id === id? {...m,title: newTitle}: m))
+        setTodolists(todolists.map(m => m.id === id ? {...m, title: newTitle} : m))
     }
 
     return (
