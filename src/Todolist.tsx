@@ -2,8 +2,9 @@ import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from "./Component/AddItemForm";
 import {EditableSpan} from './Component/EditableSpan';
-import {Button} from "./Component/Button";
+import {Button1} from "./Component/Button1";
 import {SingleInput} from "./Component/SingleInput";
+import {Button, Checkbox} from '@material-ui/core';
 
 export type TaskType = {
     id: string
@@ -35,9 +36,9 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
     const allFilterHandler = (value: FilterValuesType) => {
         changeFilter(value, id)
     }
-    // const addTask = (title: string) => {
-    //     props.addTask(title, id)
-    // }
+    const addTask = (title: string) => {
+        props.addTask(title, id)
+    }
 
     const callBackHandlerInput = () => {
         if (title.trim() !== "") {
@@ -55,17 +56,17 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
     }
 
     return <div>
-        <h3><EditableSpan title={props.title} onChange={changeTitleTodolist}/> <Button callBack={removeTodolist}/>
+        <h3><EditableSpan title={props.title} onChange={changeTitleTodolist}/> <Button1 callBack={removeTodolist}/>
         </h3>
-        {/*<AddItemForm addItem={addTask}/>*/}
+        <AddItemForm addItem={addTask}/>
         <div>
             {/*<Input todolistID={todolistID} callBack={props.addTask}/>*/}
-            <SingleInput title={title} setTitle={onChangeError} callBack={callBackHandlerInput}
-                         todolistID={id}/>
-            {error && <div className="error-message">{error}</div>}
-            <Button callBack={callBackHandlerInput}/>
+            {/*<SingleInput title={title} setTitle={onChangeError} callBack={callBackHandlerInput}*/}
+            {/*             todolistID={id}/>*/}
+            {/*{error && <div className="error-message">{error}</div>}*/}
+            {/*<Button1 callBack={callBackHandlerInput}/>*/}
         </div>
-        <ul>
+        <div>
             {
                 tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, id)
@@ -77,24 +78,24 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
                         props.changeTaskTitle(t.id, newValue, id);
                     }
 
-                    return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <input type="checkbox" onChange={onChangeStatusHandler} checked={t.isDone}/>
+                    return <div key={t.id} className={t.isDone ? "is-done" : ""}>
+                        <Checkbox onChange={onChangeStatusHandler} checked={t.isDone}/>
                         <EditableSpan title={t.title} onChange={onChangeHandler}/>
-                        <Button callBack={onClickHandler}/>
-                    </li>
+                        <Button1 callBack={onClickHandler}/>
+                    </div>
                 })
             }
-        </ul>
+        </div>
         <div>
-            <button className={filter === 'all' ? "active-filter" : ""}
+            <Button variant={filter === 'all' ? "contained" : "text"}
                     onClick={() => allFilterHandler('all')}>All
-            </button>
-            <button className={filter === 'active' ? "active-filter" : ""}
+            </Button>
+            <Button color={"primary"} variant={filter === 'active' ? "contained" : "text"}
                     onClick={() => allFilterHandler('active')}>Active
-            </button>
-            <button className={filter === 'completed' ? "active-filter" : ""}
+            </Button>
+            <Button color={"secondary"} variant={filter === 'completed' ? "contained" : "text"}
                     onClick={() => allFilterHandler('completed')}>Completed
-            </button>
+            </Button>
         </div>
     </div>
 }
