@@ -87,13 +87,13 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
             }
         </div>
         <div>
-            <Button variant={filter === 'all' ? "contained" : "text"}
+            <Button variant={filter === 'all' ? "contained" : "text"} size={"small"}
                     onClick={() => allFilterHandler('all')}>All
             </Button>
-            <Button color={"primary"} variant={filter === 'active' ? "contained" : "text"}
+            <Button color={"primary"} variant={filter === 'active' ? "contained" : "text"} size={"small"}
                     onClick={() => allFilterHandler('active')}>Active
             </Button>
-            <Button color={"secondary"} variant={filter === 'completed' ? "contained" : "text"}
+            <Button color={"secondary"} variant={filter === 'completed' ? "contained" : "text"} size={"small"}
                     onClick={() => allFilterHandler('completed')}>Completed
             </Button>
         </div>
