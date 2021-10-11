@@ -1,8 +1,9 @@
 import {FilterValuesType, TodolistType} from "../App";
+import {AddTodoListACType} from "./TaskReducer";
 
 export const TodoListReducer = (state: TodolistType[], action: AllTypes): TodolistType[] => {
     switch (action.type) {
-        case 'ADD-TODOLIST': {
+        case 'ADD-TASK-TODOLIST': {
             return [...state, {id: action.id, title: action.title, filter: "all"}]
         }
         case 'CHANGE-TODOLIST-TITLE': {
@@ -19,16 +20,16 @@ export const TodoListReducer = (state: TodolistType[], action: AllTypes): Todoli
     }
 }
 
-export type AllTypes = AddTodoListACType | ChangeTodoListTitleACType | ChangeFilterACType | RemoveTodoListACType
+export type AllTypes = AddTaskTodoListACType | ChangeTodoListTitleACType | ChangeFilterACType | RemoveTodoListACType | AddTodoListACType
 
-export type AddTodoListACType = ReturnType<typeof AddTaskTodoListAC>
+export type AddTaskTodoListACType = ReturnType<typeof AddTaskTodoListAC>
 export type ChangeTodoListTitleACType = ReturnType<typeof ChangeTodoListTitleAC>
 export type ChangeFilterACType = ReturnType<typeof ChangeFilterAC>
 export type RemoveTodoListACType = ReturnType<typeof RemoveTodoListAC>
 
 export const AddTaskTodoListAC = (title: string, id: string) => {
     return {
-        type: 'ADD-TODOLIST',
+        type: 'ADD-TASK-TODOLIST',
         title, id
     } as const
 }

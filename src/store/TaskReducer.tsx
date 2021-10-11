@@ -44,41 +44,41 @@ export const TaskReducer = (state: TasksStateType, action: allTypes): TasksState
 
 export type allTypes = ADDTaskACType | ChangeTaskTitleACType | RemoveTaskACType | ChangeStatusACType | AddTodoListACType
 
-export type RemoveTaskACType = ReturnType<typeof RemoveTaskAC>
-export type ChangeTaskTitleACType = ReturnType<typeof ChangeTaskTitleAC>
-export type ADDTaskACType = ReturnType<typeof AddTaskAC>
-export type ChangeStatusACType = ReturnType<typeof ChangeStatusAC>
-export type AddTodoListACType = ReturnType<typeof AddTodoListAC>
+export type RemoveTaskACType = ReturnType<typeof removeTaskAC>
+export type ChangeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
+export type ADDTaskACType = ReturnType<typeof addTaskAC>
+export type ChangeStatusACType = ReturnType<typeof changeStatusAC>
+export type AddTodoListACType = ReturnType<typeof addTodoListAC>
 
-export const RemoveTaskAC = (id: string, todolistID: string) => {
+export const removeTaskAC = (id: string, todolistID: string) => {
     return {
         type: 'REMOVE-TASK',
         id, todolistID
     } as const
 }
 
-export const AddTaskAC = (title: string, todolistID: string) => {
+export const addTaskAC = (title: string, todolistID: string) => {
     return {
         type: 'ADD-TASK',
         title, todolistID
     } as const
 }
 
-export const ChangeTaskTitleAC = (title: string, taskId: string, todolistID: string) => {
+export const changeTaskTitleAC = (title: string, taskId: string, todolistID: string) => {
     return {
         type: 'CHANGE-TASK-TITLE',
         title, taskId, todolistID
     } as const
 }
 
-export const ChangeStatusAC = (taskId: string, isDone: boolean, todolistID: string) => {
+export const changeStatusAC = (taskId: string, isDone: boolean, todolistID: string) => {
     return {
         type: 'CHANGE-STATUS',
         taskId, isDone, todolistID
     } as const
 }
 
-export const AddTodoListAC = (id: string) => {
+export const addTodoListAC = (id: string) => {
     return {
         type: 'ADD-TODOLIST',
         id

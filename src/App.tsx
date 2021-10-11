@@ -12,10 +12,10 @@ import {
     TodoListReducer
 } from "./store/TodoListReducer";
 import {
-    AddTaskAC,
-    AddTodoListAC,
-    ChangeStatusAC, ChangeTaskTitleAC,
-    RemoveTaskAC,
+    addTaskAC,
+    addTodoListAC,
+    changeStatusAC, changeTaskTitleAC,
+    removeTaskAC,
     TaskReducer
 } from "./store/TaskReducer";
 
@@ -58,15 +58,15 @@ function App() {
 
 
     function removeTask(id: string, todolistId: string) {
-        dispatchTasks(RemoveTaskAC(id, todolistId))
+        dispatchTasks(removeTaskAC(id, todolistId))
     }
 
     function addTask(title: string, todolistId: string) {
-        dispatchTasks(AddTaskAC(title,todolistId))
+        dispatchTasks(addTaskAC(title,todolistId))
     }
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        dispatchTasks(ChangeStatusAC(id,isDone,todolistId))
+        dispatchTasks(changeStatusAC(id,isDone,todolistId))
     }
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
@@ -79,12 +79,12 @@ function App() {
 
     function addTodoListForm(title: string) {
         const id = v1()
-        dispatchTasks(AddTodoListAC(id))
+        dispatchTasks(addTodoListAC(id))
         dispatchTodolists(AddTaskTodoListAC(title,id))
     }
 
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        dispatchTasks(ChangeTaskTitleAC(id,newTitle,todolistId))
+        dispatchTasks(changeTaskTitleAC(id,newTitle,todolistId))
     }
 
     function changeTitleTodolist(id: string, newTitle: string) {
