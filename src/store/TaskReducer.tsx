@@ -1,8 +1,9 @@
 import {v1} from "uuid";
 import {TasksStateType} from "../App";
 
+let initialState: TasksStateType = {};
 
-export const TaskReducer = (state: TasksStateType, action: allTypes): TasksStateType => {
+export const TaskReducer = (state = initialState, action: allTypes): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK': {
             return {...state, [action.todolistID]: state[action.todolistID].filter(f => f.id !== action.id)}
@@ -64,10 +65,10 @@ export const addTaskAC = (title: string, todolistID: string) => {
     } as const
 }
 
-export const changeTaskTitleAC = (title: string, taskId: string, todolistID: string) => {
+export const changeTaskTitleAC = (taskId: string, title: string, todolistID: string) => {
     return {
         type: 'CHANGE-TASK-TITLE',
-        title, taskId, todolistID
+        taskId,title,todolistID
     } as const
 }
 
