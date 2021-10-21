@@ -22,12 +22,13 @@ export const EditableSpan = (props: EditableSpan) => {
         setTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLDivElement>) => {
-        if(e.key === 'Enter'){
+        if (e.key === 'Enter') {
             activeViewMode()
         }
     }
 
     return editMode ?
-        <TextField value={title} onChange={onChangeTitleHandler} onBlur={activeViewMode} onKeyPress={onKeyPressHandler} autoFocus/> :
+        <TextField value={title} onChange={onChangeTitleHandler} onBlur={activeViewMode} onKeyPress={onKeyPressHandler}
+                   autoFocus/> :
         <span onDoubleClick={activeEditMode}>{props.title}</span>
 }

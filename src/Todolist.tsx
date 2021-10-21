@@ -28,8 +28,8 @@ type PropsType = {
 
 
 export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType) {
-    let [title, setTitle] = useState("");
-    let [error, setError] = useState<string | null>(null);
+    // let [title, setTitle] = useState("");
+    // let [error, setError] = useState<string | null>(null);
 
     const removeTodolist = () => props.removeTodolist(id)
     const changeTitleTodolist = (newTitle: string) => props.changeTitleTodolist(id, newTitle)
@@ -40,20 +40,19 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
         props.addTask(title, id)
     }
 
-    const callBackHandlerInput = () => {
-        if (title.trim() !== "") {
-            props.addTask(title.trim(), id)
-            setTitle("")
-        } else {
-            setError("Error")
-        }
-    }
+    // const callBackHandlerInput = () => {
+    //     if (title.trim() !== "") {
+    //         props.addTask(title.trim(), id)
+    //         setTitle("")
+    //     } else {
+    //         setError("Error")
+    //     }
+    // }
 
-
-    const onChangeError = (title: string) => {
-        setTitle(title)
-        setError("")
-    }
+    // const onChangeError = (title: string) => {
+    //     setTitle(title)
+    //     setError("")
+    // }
 
     return <div>
         <h3><EditableSpan title={props.title} onChange={changeTitleTodolist}/> <Button1 callBack={removeTodolist}/>
@@ -70,10 +69,12 @@ export function Todolist({id, changeFilter, filter, tasks, ...props}: PropsType)
             {
                 tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, id)
+
                     const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         let newIsDoneValue = e.currentTarget.checked;
                         props.changeTaskStatus(t.id, newIsDoneValue, id);
                     }
+
                     const onChangeHandler = (newValue: string) => {
                         props.changeTaskTitle(t.id, newValue, id);
                     }
