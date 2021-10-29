@@ -80,6 +80,7 @@ export const changeStatusAC = (taskId: string, isDone: boolean, todolistID: stri
 }
 
 export const addTodoListAC = (id: string) => {
+    debugger
     return {
         type: 'ADD-TODOLIST',
         id
