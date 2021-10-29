@@ -35,6 +35,7 @@ export type ChangeFilterACType = ReturnType<typeof ChangeFilterAC>
 export type RemoveTodoListACType = ReturnType<typeof RemoveTodoListAC>
 
 export const AddTaskTodoListAC = (title: string, id: string) => {
+    debugger
     return {
         type: 'ADD-TASK-TODOLIST',
         title, id
