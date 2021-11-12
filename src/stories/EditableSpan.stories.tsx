@@ -19,6 +19,6 @@ export const EditableSpanStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 // @ts-ignore
 EditableSpanStory.args = {
-    value: 'HTML',
+    title: 'HTML',
     onChange: action('Value EditableSpan changed')
 };
