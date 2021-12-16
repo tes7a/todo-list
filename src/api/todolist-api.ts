@@ -19,7 +19,35 @@ type CommonResponseType<T = {}> = {
     resultCode: number,
     messages: string[],
     fieldsErrors: string[],
-    data: T
+    data: T,
+}
+
+type TaskType = {
+    description: string,
+    title: string,
+    status: number,
+    priority: number,
+    startDate: string,
+    deadline: string,
+    id: string,
+    todoListId: string,
+    order: number,
+    addedDate: string,
+}
+
+type GetTasksResponseType = {
+    error: string | null,
+    totalCount: number,
+    items: TaskType[],
+}
+
+type UpdateTaskType = {
+    description: string,
+    title: string,
+    status: number,
+    priority: number,
+    startDate: string,
+    deadline: string,
 }
 
 export const todolistApi = {
@@ -35,5 +63,14 @@ export const todolistApi = {
     updateTodo(todolistId: string, title: string) {
         return instance.put<CommonResponseType>(`todo-lists/${todolistId}`, {title});
     },
+    getTasks(todolistId: string) {
+        return instance.get<GetTasksResponseType>(`/todo-lists/${todolistId}/tasks`);
+    },
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<CommonResponseType>(`/todo-lists/${todolistId}/tasks/${taskId}`);
+    },
+    updateTask(todolistId: string, taskId: string) {
+        return instance.put(`/todo-lists/${todolistId}/tasks/${taskId}`)
+    }
 }
 
