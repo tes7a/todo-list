@@ -25,6 +25,8 @@ type PropsType = {
     demo?: boolean
 }
 
+//test
+
 function App({demo = false}: PropsType) {
     const status = useSelector(selectStatus)
     const isInitialized = useSelector(selectIsInitialized)
