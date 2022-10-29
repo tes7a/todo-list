@@ -38,15 +38,17 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         } else {
             helper.setTitle('')
         }
-    }, [])
+    }, [dispatch])
 
 
     useEffect(() => {
         if (demo || !isLoggedIn) {
             return
         }
-        fetchTodolistsTC()
-    }, [])
+        if(!todolists.length) {
+            fetchTodolistsTC()
+        }
+    }, [demo, fetchTodolistsTC, isLoggedIn, todolists.length])
 
 
     if (!isLoggedIn) {
