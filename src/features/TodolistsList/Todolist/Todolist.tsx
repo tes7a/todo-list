@@ -29,8 +29,6 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
             fetchTasks(props.todolist.id)
         }
     }, [demo, fetchTasks, props.tasks.length, props.todolist.id])
-    console.log('2323');
-    
 
     const addTaskCallback = useCallback(async (title: string, helper: AddItemFormSubmitHelperType) => {
 
